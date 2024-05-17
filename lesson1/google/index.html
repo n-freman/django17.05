@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            color: white;
+        }
+        body {
+            background-color: #202124;
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding-right: 20px;
+        }
+        nav > ul, footer ul {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        nav img:last-child {
+            border-radius: 50px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 98px;
+            font-weight: 500;
+        }
+        form {
+            display: flex;
+            height: 40px;
+            margin: 0 auto;
+            max-width: max-content;
+            border: 1px solid #eef0ff;
+            padding: 10px 15px;
+            align-items: center;
+            border-radius: 30px;
+            gap: 10px;
+        }
+        form img {
+            height: 35px;
+        }
+        input {
+            background-color: #202124;
+            border: none;
+            width: 400px;
+            height: 35px;
+        }
+        .buttons {
+            display: flex;
+            margin: 40px auto;
+            max-width: max-content;
+            gap: 40px;
+        }
+        .buttons a {
+            display: block;
+            background-color: #303134;
+            padding: 15px 30px;
+            border-radius: 3px;
+        }
+        .buttons a:hover {
+            border: 1px solid #5f6368;
+        }
+        main p {
+            text-align: center;
+            color: #bfbfbf;
+        }
+        main p a {
+            color: #9ac3ff;
+        }
+        footer {
+            background-color: #171717;
+            margin-top: 200px;
+            padding: 10px 20px;
+        }
+        .country {
+            padding-left: 40px;
+        }
+        .bottom-line {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="">About</a></li>
+            <li><a href="">Store</a></li>
+        </ul>
+        <ul>
+            <li><a href="">Gmail</a></li>
+            <li><a href="">Image</a></li>
+            <li>
+                <a href="">
+                    <img src="images/al-icon.png" alt="">
+                </a>
+            </li>
+            <li><a href=""><img src="images/profile.jpg" alt=""></a></li>
+        </ul>
+    </nav>
+    <main>
+        <h1>Google</h1>
+        <form action="">
+            <img src="images/loop.png" alt="">
+            <input type="text">
+            <a href="">
+                <img src="images/micro.png" alt="">
+            </a>
+            <a href="">
+                <img src="images/camera.png" alt="">
+            </a>
+        </form>
+        <div class="buttons">
+            <a href="">Google Search</a>
+            <a href="">I'm feeling lucky</a>
+        </div>
+        <p>Google offered in: <a href="">Deutsch</a></p>
+    </main>
+    <footer>
+        <p class="country">Germany</p>
+        <hr>
+        <div class="bottom-line">
+            <ul>
+                <li><a href="">Advertising</a></li>
+                <li><a href="">Business</a></li>
+                <li><a href="">How Search works</a></li>
+            </ul>
+            <ul>
+                <li><a href="">Privacy</a></li>
+                <li><a href="">Terms</a></li>
+                <li><a href="">Settings</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
