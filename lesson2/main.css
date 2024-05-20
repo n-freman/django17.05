@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* Учитывает границы в ширине */
+    box-sizing: border-box;
+    color: white;
+    font-family: Alata, sans-serif;
+    font-weight: 400;
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+    background-color: #E1EDC1;
+}
+
+main {
+    max-width: 30vw;
+    height: 90vh;
+    background-color: #242526;
+    margin: 5vh auto;
+    padding: 64px 25px;
+    border-radius: 20px;
+}
+
+h1 {
+    max-width: 340px;
+    font-size: 48px;
+}
+
+.central {
+    margin-top: 18vh;
+}
+
+label {
+    text-transform: uppercase;
+    display: block;
+}
+
+input {
+    display: block;
+    background: none;
+    border: none;
+    border-bottom: 1.5px solid #989898;
+    width: 100%;
+    margin-bottom: 50px;
+    padding: 7px 5px;
+}
+
+button {
+    border: none;
+    border-radius: 6px;
+    background-color: #19C6BB;
+    width: 100%;
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 10vh;
+}
+
+.create-link {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #989898;
+    margin-top: 2vh;
+    font-size: 12px;
+}
+
+@media screen and (max-width: 600px) {
+    main {
+        max-width: 80vw;
+    }
+}
