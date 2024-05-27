@@ -25,13 +25,17 @@ from news import views as news_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", home),
-    path("cars", cars_views.home),
-    path("news", news_views.home),
+    path("", home, name='home'),
+    path("cars", cars_views.home, name='cars'),
+    path("cars/<int:pk>", cars_views.car, name='car-object'),
+    path("news", news_views.home, name='news'),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(
         settings.STATIC_URL,
         document_root=settings.STATIC_ROOT
+    ) + static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
     )
