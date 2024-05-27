@@ -23,6 +23,10 @@ main {
     margin: 5vh auto;
     padding: 64px 25px;
     border-radius: 20px;
+    box-shadow: 2px 2px 30px #707070af,
+                -2px 2px 30px #707070af,
+                2px -2px 30px #707070af,
+                -2px -2px 30px #707070af;
 }
 
 h1 {
@@ -61,6 +65,14 @@ button {
     padding: 20px 0;
     text-align: center;
     margin-top: 10vh;
+}
+
+button:hover, a:hover {
+	transform: scale(1.01);
+}
+
+button:active {
+	transform: scale(.99);
 }
 
 .create-link {
