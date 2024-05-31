@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ news.title }}</h1>
+<img src="{{ news.image.url }}" alt="{{ news.title }}" class="news__image"/>
+<p>{{ news.content }}</p>
+<p>Date Added: {{ news.created_at|date:"d.m.Y H:i" }}</p>
+{% endblock %}

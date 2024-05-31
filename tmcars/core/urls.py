@@ -19,8 +19,9 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from main.views import home
+from custom_auth import views as auth_views
 from cars import views as cars_views
+from main.views import home
 from news import views as news_views
 
 urlpatterns = [
@@ -28,7 +29,12 @@ urlpatterns = [
     path("", home, name='home'),
     path("cars", cars_views.home, name='cars'),
     path("cars/<int:pk>", cars_views.car, name='car-object'),
+    path("cars/my-cars", cars_views.my_cars, name='my-cars'),
     path("news", news_views.home, name='news'),
+    path("news/<int:pk>", news_views.news_page, name='news-object'),
+    path("register", auth_views.register, name='register'),
+    path("login", auth_views.login_page, name='login'),
+    path("logout", auth_views.logout_view, name='logout')
 ]
 
 if settings.DEBUG:

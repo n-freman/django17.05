@@ -1,4 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>News page</h1>
+<div class="news">
+    {% for news_object in news %}
+    <div class="news_item">
+        <a href="{% url 'news-object' news_object.id %}">
+            <img
+            src="{{ news_object.image.url }}"
+            alt="{{ news_object.title }}"
+            class="news__image" />
+        </a>
+        <a href="{% url 'news-object' news_object.id %}">
+            <h3 class="news__title">{{ news_object.title }}</h3>
+        </a>
+        <p>{{ news_object.created_at|date:"d.m.Y H:i" }}</p>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

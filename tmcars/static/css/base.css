@@ -30,7 +30,7 @@ main {
     margin: 0 auto;
 }
 
-.posts {
+.posts, .news {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -39,24 +39,121 @@ main {
     gap: 2em;
 }
 
-.post {
+.post, .news_item {
     border: 1px solid #77777777;
     padding: 1em;
     border-radius: 5px;
     width: 22em;
 }
 
-.post a {
+.post a, .news_item a {
     text-decoration: none;
 }
 
-.post__image {
+.post__image, .news__image {
     width: 20em;
     height: 10em;
 }
 
-.post__title {
+.post__title, .news__title {
     margin: 2em 0 1em;
     color: black;
     text-decoration: none;
+}
+
+h1 + img {
+    margin: 2em 0;
+    max-width: 60vw;
+}
+
+label {
+    text-transform: uppercase;
+    display: block;
+}
+
+form {
+    margin: 2em;
+}
+
+input {
+    display: block;
+    background: none;
+    border: none;
+    border-bottom: 1.5px solid #989898;
+    width: 100%;
+    margin: 1em 0;
+    padding: 7px 5px;
+    font-size: 2em;
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    border: none;
+    border-radius: 6px;
+    background-color: #1939c6;
+    color: white;
+    width: 100%;
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 2em;
+}
+
+button:hover, a:hover {
+	transform: scale(1.01);
+}
+
+button:active {
+	transform: scale(.99);
+}
+
+*:focus {
+    outline: none;
+}
+
+.message {
+    padding: .5em 1em;
+    border: 1px solid gray;
+    border-radius: 5px;
+    color: #333;
+}
+
+.message-error {
+    background-color: #ff000077;
+}
+
+
+.message-success {
+    background-color: #00ff0077;
+}
+
+.center-text {
+    margin: 1em auto;
+    max-width: max-content;
+}
+
+.button {
+    background-color: #1877f2; /* Facebook blue */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+    margin: 1em 0;
+}
+
+.button:hover {
+    background-color: #165db7; /* Darker blue on hover */
 }

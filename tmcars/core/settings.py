@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "main",
     "cars",
     "news",
+    "custom_auth",
 ]
 
 MIDDLEWARE = [

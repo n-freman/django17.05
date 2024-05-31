@@ -4,4 +4,9 @@
 <img src="{{ car.image.url }}" alt="{{ car.title }}" class="car__image"/>
 <p>{{ car.description }}</p>
 <p>Price: {{ car.price }}</p>
+<ul>
+{% for characteristic in car.characteristics.all %}
+<li>{{ characteristic.title }}: {{ characteristic.value }}</li>
+{% endfor %}
+</ul>
 {% endblock %}
