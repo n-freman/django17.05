@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,14 +25,10 @@ from main.views import home
 from news import views as news_views
 
 urlpatterns = [
+    path('jet/', include('jet.urls', 'jet')),
     path("admin/", admin.site.urls),
     path("", home, name='home'),
-    path("cars", cars_views.home, name='cars'),
-    path("cars/<int:pk>", cars_views.car, name='car-object'),
-    path("cars/my-cars", cars_views.my_cars, name='my-cars'),
-    path("cars/add", cars_views.add_car, name='add-car'),
-    path("cars/edit/<int:pk>", cars_views.edit_car, name='edit-car'),
-    path("cars/delete/<int:pk>", cars_views.delete_car, name='delete-car'),
+    path("cars/", include('cars.urls')),
     path("news", news_views.home, name='news'),
     path("news/<int:pk>", news_views.news_page, name='news-object'),
     path("register", auth_views.register, name='register'),

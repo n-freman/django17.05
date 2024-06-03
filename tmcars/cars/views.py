@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from .forms import PostForm
+from .forms import PostForm, SearchForm
 from .models import Post
 
 
@@ -101,3 +101,29 @@ def delete_car(request, pk):
         'Deleted car...'
     )
     return redirect('my-cars')
+
+
+def search(request):
+    form = SearchForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'cars/search.html', context)
+
+
+def search_results(request):
+    form = SearchForm(data=request.GET)
+    posts = Post.objects.all()
+    title = form['title'].value()
+    min_price = form['min_price'].value()
+    max_price = form['max_price'].value()
+    if title != '':
+        posts = posts.filter(title__contains=title)
+    if min_price != '':
+        posts = posts.filter(price__gt=min_price)
+    if max_price != '':
+        posts = posts.filter(price__lt=max_price)
+    context = {
+        'posts': posts
+    }
+    return render(request, 'cars/search_results.html', context)

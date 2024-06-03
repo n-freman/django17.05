@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Search car</h1>
+<form action="{% url 'car-search-results' %}">
+    {{ form }}
+    <button type="submit">Search</button>
+</form>
+{% endblock %}
