@@ -157,3 +157,18 @@ button:active {
 .button:hover {
     background-color: #165db7; /* Darker blue on hover */
 }
+
+.btn-red {
+    background-color: red;
+}
+
+textarea {
+    margin: 1em 0;
+    font-size: 2em;
+}
+
+.errorlist {
+    list-style: none;
+    color: red;
+    font-size: 1.5em;
+}
