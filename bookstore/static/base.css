@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+small {
+    color: gray;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 1em;
+}
+
+nav ul a {
+    color: darkslateblue;
+    text-decoration: none;
+}
+
+main {
+    max-width: 80vw;
+    margin: 0 auto;
+}
+
+form * {
+    display: block;
+    margin: 1em;
+}
+
+.book {
+    padding: 1em;
+    margin: 2em;
+    border: 1px solid gray;
+    max-width: max-content;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.book img, .book-detail img {
+    height: 10em;
+}

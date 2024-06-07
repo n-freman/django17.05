@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="book-detail">
+    <img src="{{ object.image.url }}" alt="">
+    <p>{{ object.title }}</p>
+    <p><small>{{ object.owner.username }}</small></p>
+    <p>{{ object.description }}</p>
+</div>
+{% endblock %}

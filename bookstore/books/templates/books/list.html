@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for book in object_list %}
+    <div class="book">
+        <img src="{{ book.image.url }}" alt="">
+        <a href="{% url 'book-detail' book.id %}"><p>{{ book.title }}</p></a>
+        <p><small>{{ book.owner.username }}</small></p>
+    </div>
+{% endfor %}
+{% endblock %}
