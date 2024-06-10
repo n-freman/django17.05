@@ -24,6 +24,9 @@ from books.views import (
     BookListView,
     BookDetailView,
     BookCreateView,
+    BookUpdateView,
+    BookDeleteView,
+    MyBookListView,
 )
 
 urlpatterns = [
@@ -31,7 +34,10 @@ urlpatterns = [
     path('login', LoginView.as_view(), name='login'),
     path('logout', LogoutView.as_view(), name='logout'),
     path('', BookListView.as_view(), name='home'),
+    path('my-books', MyBookListView.as_view(), name='my-books'),
     path('books/<int:pk>', BookDetailView.as_view(), name='book-detail'),
-    path('book/create', BookCreateView.as_view(), name='book-create'),
+    path('books/create', BookCreateView.as_view(), name='book-create'),
+    path('books/update/<int:pk>', BookUpdateView.as_view(), name='book-update'),
+    path('books/delete/<int:pk>', BookDeleteView.as_view(), name='book-delete'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
