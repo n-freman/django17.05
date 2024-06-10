@@ -13,10 +13,10 @@
             <li>
                 <a href="{% url 'home' %}">Home</a>
             </li>
+            {% if user.is_authenticated %}
             <li>
                 <a href="{% url 'book-create' %}">Add book</a>
             </li>
-            {% if user.is_authenticated %}
             <li>
                 <a href="{% url 'my-books' %}">My Books</a>
             </li>
@@ -28,8 +28,16 @@
                 <a href="{% url 'login' %}">Login</a>
                 {% endif %}
             </li>
+            {% if not user.is_authenticated %}
+            <li>
+                <a href="{% url 'register' %}">Register</a>
+            </li>
+            {% endif %}
         </ul>
     </nav>
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
     <main>
         <h1>Book Store</h1>
         {% block content %}

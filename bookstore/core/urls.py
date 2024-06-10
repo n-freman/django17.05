@@ -28,11 +28,14 @@ from books.views import (
     BookDeleteView,
     MyBookListView,
 )
+from users.views import RegisterView, email_verification
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('login', LoginView.as_view(), name='login'),
     path('logout', LogoutView.as_view(), name='logout'),
+    path('register', RegisterView.as_view(), name='register'),
+    path('email-verification', email_verification, name='email-verification'),
     path('', BookListView.as_view(), name='home'),
     path('my-books', MyBookListView.as_view(), name='my-books'),
     path('books/<int:pk>', BookDetailView.as_view(), name='book-detail'),
