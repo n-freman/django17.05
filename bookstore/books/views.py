@@ -1,6 +1,6 @@
 from django import http
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models.query import QuerySet
 from django.views.generic import (
     ListView,
     DetailView,
@@ -8,10 +8,15 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .models import Book
+from .serializers import BookSerializer
 
 
 class BookListView(ListView):
@@ -63,3 +68,56 @@ class BookDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self) -> str:
         return reverse_lazy('home')
+
+
+@api_view(['GET'])
+def get_books(request):
+    books = Book.objects.all()
+    serializer = BookSerializer(books, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+@csrf_exempt
+def create_book(request):
+    serializer = BookSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class BooksAPIView(APIView):
+
+    def get(self, request):
+        books = Book.objects.all()
+        serializer = BookSerializer(books, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = BookSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SingleBookAPIView(APIView):
+
+    def get(self, request, pk):
+        book = get_object_or_404(Book, pk=pk)
+        serializer = BookSerializer(book)
+        return Response(serializer.data)
+
+    def delete(self, request, pk):
+        book = get_object_or_404(Book, pk=pk)
+        book.delete()
+        return Response({'detail': 'Ok'})
+    
+    def patch(self, request, pk):
+        book = get_object_or_404(Book, pk=pk)
+        serializer = BookSerializer(book, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -55,4 +55,5 @@ def email_verification(request):
         messages.SUCCESS,
         'Your email was confirmed. Please login!'
     )
+    token.delete()
     return redirect('login')

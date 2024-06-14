@@ -2,7 +2,14 @@
 {% block content %}
 {% for book in object_list %}
     <div class="book">
-        <img src="{{ book.image.url }}" alt="">
+        <img src="
+            {% if book.image|stringformat:"s"|slice:":4" == 'http' %}
+                {{ book.image }}
+            {% else %}
+                {{ book.image.url }}
+            {% endif %}"
+            alt=""
+        >
         <a href="{% url 'book-detail' book.id %}"><p>{{ book.title }}</p></a>
         <p><small>{{ book.owner.username }}</small></p>
     </div>

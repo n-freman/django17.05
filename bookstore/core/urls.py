@@ -27,6 +27,8 @@ from books.views import (
     BookUpdateView,
     BookDeleteView,
     MyBookListView,
+    BooksAPIView,
+    SingleBookAPIView
 )
 from users.views import RegisterView, email_verification
 
@@ -42,5 +44,7 @@ urlpatterns = [
     path('books/create', BookCreateView.as_view(), name='book-create'),
     path('books/update/<int:pk>', BookUpdateView.as_view(), name='book-update'),
     path('books/delete/<int:pk>', BookDeleteView.as_view(), name='book-delete'),
+    path('api/books/', BooksAPIView.as_view(), name='books-api'),
+    path('api/books/<int:pk>/', SingleBookAPIView.as_view(), name='single-book-api'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
