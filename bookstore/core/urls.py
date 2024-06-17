@@ -19,20 +19,10 @@ from django.urls import path, include
 from django.contrib.auth.views import LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
 
 from books.views import (
     BookListView,
-    BookDetailView,
-    BookCreateView,
-    BookUpdateView,
-    BookDeleteView,
     MyBookListView,
-    BooksAPIView,
-    SingleBookAPIView,
 )
 from users.views import RegisterView, email_verification
 
@@ -44,13 +34,7 @@ urlpatterns = [
     path('email-verification', email_verification, name='email-verification'),
     path('', BookListView.as_view(), name='home'),
     path('my-books', MyBookListView.as_view(), name='my-books'),
-    path('books/<int:pk>', BookDetailView.as_view(), name='book-detail'),
-    path('books/create', BookCreateView.as_view(), name='book-create'),
-    path('books/update/<int:pk>', BookUpdateView.as_view(), name='book-update'),
-    path('books/delete/<int:pk>', BookDeleteView.as_view(), name='book-delete'),
-    path('api/books/', BooksAPIView.as_view(), name='books-api'),
-    path('api/books/<int:pk>/', SingleBookAPIView.as_view(), name='single-book-api'),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('books/', include('books.urls')),
+    path('api/', include('api.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

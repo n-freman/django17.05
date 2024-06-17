@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 
 from .models import Book
 from .permissions import OwnBookOrReadOnly
@@ -88,41 +88,7 @@ def create_book(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class BooksAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-    def get(self, request):
-        books = Book.objects.all()
-        serializer = BookSerializer(books, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = BookSerializer(data=request.data, context={'request': request})
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class SingleBookAPIView(APIView):
-    permission_classes = [OwnBookOrReadOnly]
-
-    def get(self, request, pk):
-        book = get_object_or_404(Book, pk=pk)
-        serializer = BookSerializer(book)
-        return Response(serializer.data)
-
-    def delete(self, request, pk):
-        book = get_object_or_404(Book, pk=pk)
-        # if book.user != request.user:
-        #     return Response({'detail': 'Can only edit your own book'}, status=401)
-        book.delete()
-        return Response({'detail': 'Ok'})
-    
-    def patch(self, request, pk):
-        book = get_object_or_404(Book, pk=pk)
-        serializer = BookSerializer(book, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class BooksViewSet(ModelViewSet):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, OwnBookOrReadOnly]
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()

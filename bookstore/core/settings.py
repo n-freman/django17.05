@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'books',
     'users',
+    'api',
 
     'rest_framework',
 ]
