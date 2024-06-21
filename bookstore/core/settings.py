@@ -10,8 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from datetime import timedelta
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv('.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-+s*pt^$3_jw#o6=o8h3b6=z6d^3u5%*a&eg%xtfe7w&*z@5b4f"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
 
     'books',
     'users',
+    'likes',
     'api',
 
     'rest_framework',
@@ -81,9 +86,17 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
+    # "default": {
+    #     "ENGINE": "django.db.backends.sqlite3",
+    #     "NAME": "db.sqlite3"
+    # }
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": os.getenv('DB_HOST'),
+        "PORT": os.getenv('DB_PORT'),
+        "USER": os.getenv('DB_USER'),
+        "PASSWORD": os.getenv('DB_PWD'),
+        "NAME": os.getenv('DB_NAME')
     }
 }
 

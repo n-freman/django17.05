@@ -9,10 +9,21 @@ class BookSerializer(serializers.ModelSerializer):
         read_only=True,
         default=serializers.CurrentUserDefault()
     )
+    likes_count = serializers.IntegerField(read_only=True)
+    is_liked = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = Book
-        fields = '__all__'
+        fields = [
+            'id',
+            'image',
+            'owner',
+            'description',
+            'title',
+            'created_at',
+            'likes_count',
+            'is_liked'
+        ]
 
     def save(self, **kwargs):
         kwargs['owner'] = self.fields['owner'].get_default()

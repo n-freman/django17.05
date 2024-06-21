@@ -6,9 +6,11 @@ from rest_framework_simplejwt.views import (
 from rest_framework.routers import DefaultRouter
 
 from books.views import BooksViewSet
+from likes.views import LikesViewSet
 
 router = DefaultRouter()
 router.register('books', BooksViewSet, 'book')
+router.register('likes', LikesViewSet, 'likes')
 
 urlpatterns = [
     path('', include(router.urls)),

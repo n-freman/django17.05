@@ -1,5 +1,4 @@
 from django import http
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView,
@@ -9,12 +8,14 @@ from django.views.generic import (
     DeleteView
 )
 from django.urls import reverse_lazy
+from django.db.models import Subquery, OuterRef, Count, Exists
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from likes.models import Like
 from .models import Book
 from .permissions import OwnBookOrReadOnly
 from .serializers import BookSerializer
@@ -91,4 +92,19 @@ def create_book(request):
 class BooksViewSet(ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, OwnBookOrReadOnly]
     serializer_class = BookSerializer
-    queryset = Book.objects.all()
+
+    def get_queryset(self):
+        likes_subquery = Subquery(
+            Like.objects.filter(book=OuterRef('id')) \
+                .values('id')
+        )
+        queryset = Book.objects.annotate(likes_count=Count(likes_subquery))
+        if self.request.user.is_authenticated:
+            likes_subquery = Subquery(
+                Like.objects.filter(
+                    book=OuterRef('id'),
+                    user=self.request.user
+                )
+            )
+            queryset = queryset.annotate(is_liked=Exists(likes_subquery))
+        return queryset
