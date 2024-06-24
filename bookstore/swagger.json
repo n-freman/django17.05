@@ -1,0 +1,404 @@
+{
+    "swagger": "2.0",
+    "info": {
+    "title": "Bookstore API",
+    "description": "<h1>Bookstore api description</h1>",
+    "termsOfService": "https://www.google.com/policies/terms/",
+    "contact": {
+    "email": "contact@snippets.local"
+    },
+    "license": {
+    "name": "BSD License"
+    },
+    "version": "v1"
+    },
+    "host": "127.0.0.1:8000",
+    "schemes": [
+    "http"
+    ],
+    "basePath": "/api",
+    "consumes": [
+    "application/json"
+    ],
+    "produces": [
+    "application/json"
+    ],
+    "securityDefinitions": {
+    "Basic": {
+    "type": "basic"
+    }
+    },
+    "security": [
+    {
+    "Basic": []
+    }
+    ],
+    "paths": {
+    "/books/": {
+    "get": {
+    "operationId": "books_list",
+    "description": "",
+    "parameters": [],
+    "responses": {
+    "200": {
+    "description": "",
+    "schema": {
+    "type": "array",
+    "items": {
+    "$ref": "#/definitions/Book"
+    }
+    }
+    }
+    },
+    "tags": [
+    "books"
+    ]
+    },
+    "post": {
+    "operationId": "books_create",
+    "description": "",
+    "parameters": [
+    {
+    "name": "data",
+    "in": "body",
+    "required": true,
+    "schema": {
+    "$ref": "#/definitions/Book"
+    }
+    }
+    ],
+    "responses": {
+    "201": {
+    "description": "",
+    "schema": {
+    "$ref": "#/definitions/Book"
+    }
+    }
+    },
+    "tags": [
+    "books"
+    ]
+    },
+    "parameters": []
+    },
+    "/books/{id}/": {
+    "get": {
+    "operationId": "books_read",
+    "description": "",
+    "parameters": [],
+    "responses": {
+    "200": {
+    "description": "",
+    "schema": {
+    "$ref": "#/definitions/Book"
+    }
+    }
+    },
+    "tags": [
+    "books"
+    ]
+    },
+    "put": {
+    "operationId": "books_update",
+    "description": "",
+    "parameters": [
+    {
+    "name": "data",
+    "in": "body",
+    "required": true,
+    "schema": {
+    "$ref": "#/definitions/Book"
+    }
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "",
+    "schema": {
+    "$ref": "#/definitions/Book"
+    }
+    }
+    },
+    "tags": [
+    "books"
+    ]
+    },
+    "patch": {
+    "operationId": "books_partial_update",
+    "description": "",
+    "parameters": [
+    {
+    "name": "data",
+    "in": "body",
+    "required": true,
+    "schema": {
+    "$ref": "#/definitions/Book"
+    }
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "",
+    "schema": {
+    "$ref": "#/definitions/Book"
+    }
+    }
+    },
+    "tags": [
+    "books"
+    ]
+    },
+    "delete": {
+    "operationId": "books_delete",
+    "description": "",
+    "parameters": [],
+    "responses": {
+    "204": {
+    "description": ""
+    }
+    },
+    "tags": [
+    "books"
+    ]
+    },
+    "parameters": [
+    {
+    "name": "id",
+    "in": "path",
+    "required": true,
+    "type": "string"
+    }
+    ]
+    },
+    "/likes/": {
+    "post": {
+    "operationId": "likes_create",
+    "description": "",
+    "parameters": [
+    {
+    "name": "data",
+    "in": "body",
+    "required": true,
+    "schema": {
+    "$ref": "#/definitions/Like"
+    }
+    }
+    ],
+    "responses": {
+    "201": {
+    "description": "",
+    "schema": {
+    "$ref": "#/definitions/Like"
+    }
+    }
+    },
+    "tags": [
+    "likes"
+    ]
+    },
+    "parameters": []
+    },
+    "/likes/{id}/": {
+    "delete": {
+    "operationId": "likes_delete",
+    "description": "",
+    "parameters": [],
+    "responses": {
+    "204": {
+    "description": ""
+    }
+    },
+    "tags": [
+    "likes"
+    ]
+    },
+    "parameters": [
+    {
+    "name": "id",
+    "in": "path",
+    "description": "A unique integer value identifying this like.",
+    "required": true,
+    "type": "integer"
+    }
+    ]
+    },
+    "/token/": {
+    "post": {
+    "operationId": "token_create",
+    "description": "Takes a set of user credentials and returns an access and refresh JSON web\ntoken pair to prove the authentication of those credentials.",
+    "parameters": [
+    {
+    "name": "data",
+    "in": "body",
+    "required": true,
+    "schema": {
+    "$ref": "#/definitions/TokenObtainPair"
+    }
+    }
+    ],
+    "responses": {
+    "201": {
+    "description": "",
+    "schema": {
+    "$ref": "#/definitions/TokenObtainPair"
+    }
+    }
+    },
+    "tags": [
+    "token"
+    ]
+    },
+    "parameters": []
+    },
+    "/token/refresh/": {
+    "post": {
+    "operationId": "token_refresh_create",
+    "description": "Takes a refresh type JSON web token and returns an access type JSON web\ntoken if the refresh token is valid.",
+    "parameters": [
+    {
+    "name": "data",
+    "in": "body",
+    "required": true,
+    "schema": {
+    "$ref": "#/definitions/TokenRefresh"
+    }
+    }
+    ],
+    "responses": {
+    "201": {
+    "description": "",
+    "schema": {
+    "$ref": "#/definitions/TokenRefresh"
+    }
+    }
+    },
+    "tags": [
+    "token"
+    ]
+    },
+    "parameters": []
+    }
+    },
+    "definitions": {
+    "Book": {
+    "required": [
+    "image",
+    "title"
+    ],
+    "type": "object",
+    "properties": {
+    "id": {
+    "title": "ID",
+    "type": "integer",
+    "readOnly": true
+    },
+    "image": {
+    "title": "Image",
+    "type": "string",
+    "minLength": 1
+    },
+    "owner": {
+    "title": "Owner",
+    "type": "integer",
+    "readOnly": true,
+    "default": 11
+    },
+    "description": {
+    "title": "Description",
+    "type": "string",
+    "minLength": 1,
+    "x-nullable": true
+    },
+    "title": {
+    "title": "Title",
+    "type": "string",
+    "maxLength": 120,
+    "minLength": 1
+    },
+    "created_at": {
+    "title": "Created at",
+    "type": "string",
+    "format": "date-time",
+    "readOnly": true
+    },
+    "likes_count": {
+    "title": "Likes count",
+    "type": "integer",
+    "readOnly": true
+    },
+    "is_liked": {
+    "title": "Is liked",
+    "type": "boolean",
+    "readOnly": true
+    }
+    }
+    },
+    "Like": {
+    "required": [
+    "book"
+    ],
+    "type": "object",
+    "properties": {
+    "id": {
+    "title": "ID",
+    "type": "integer",
+    "readOnly": true
+    },
+    "user": {
+    "title": "User",
+    "type": "integer",
+    "readOnly": true,
+    "default": 11
+    },
+    "created_at": {
+    "title": "Created at",
+    "type": "string",
+    "format": "date-time",
+    "readOnly": true
+    },
+    "book": {
+    "title": "Book",
+    "type": "integer"
+    }
+    }
+    },
+    "TokenObtainPair": {
+    "required": [
+    "username",
+    "password"
+    ],
+    "type": "object",
+    "properties": {
+    "username": {
+    "title": "Username",
+    "type": "string",
+    "minLength": 1
+    },
+    "password": {
+    "title": "Password",
+    "type": "string",
+    "minLength": 1
+    }
+    }
+    },
+    "TokenRefresh": {
+    "required": [
+    "refresh"
+    ],
+    "type": "object",
+    "properties": {
+    "refresh": {
+    "title": "Refresh",
+    "type": "string",
+    "minLength": 1
+    },
+    "access": {
+    "title": "Access",
+    "type": "string",
+    "readOnly": true,
+    "minLength": 1
+    }
+    }
+    }
+    }
+    }

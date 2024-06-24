@@ -14,6 +14,11 @@ class LikesViewSet(
     DestroyModelMixin,
     GenericViewSet
 ):
+    '''
+    Documentation for likes api
+    <h3>I am using html here</h3>
+    <img src="https://acdn.t-static.ru/static/documents/payment%20schema%20EACQ.jpg" />
+    '''
     serializer_class = LikeSerializer
     permission_classes = [IsAuthenticated]
     queryset = Like.objects.all()

@@ -1,10 +1,1 @@
-- Приложение лайки (likes)
-- Модельку лайк (Like)
-    - user
-    - book
-    - constraint - (user, book)*
-- View (ApiView)
-
----
-
-GenericViewSet*
+Скачать и подключить базу данных postgresql

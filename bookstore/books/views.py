@@ -1,5 +1,6 @@
 from django import http
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models.query import QuerySet
 from django.views.generic import (
     ListView,
     DetailView,
@@ -25,14 +26,22 @@ class BookListView(ListView):
     model = Book
     template_name = 'books/list.html'
 
+    def get_queryset(self):
+        queryset = self.model.objects.all()
+        if self.request.user.is_authenticated:
+            likes_subquery = Subquery(
+                Like.objects.filter(
+                    book=OuterRef('id'),
+                    user=self.request.user
+                )
+            )
+            queryset = queryset.annotate(is_liked=Exists(likes_subquery))
+        return queryset
+
 
 class MyBookListView(ListView):
     model = Book
     template_name = 'books/my_list.html'
-    
-    def get_queryset(self):
-        return self.model.objects.filter(owner=self.request.user) \
-            .all()
 
 
 class BookDetailView(DetailView):

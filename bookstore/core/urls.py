@@ -20,6 +20,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 from books.views import (
     BookListView,
     MyBookListView,
@@ -35,6 +36,6 @@ urlpatterns = [
     path('', BookListView.as_view(), name='home'),
     path('my-books', MyBookListView.as_view(), name='my-books'),
     path('books/', include('books.urls')),
-    path('api/', include('api.urls'))
+    path('api/', include('api.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
